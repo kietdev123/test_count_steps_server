@@ -16,6 +16,11 @@ var count_user = 0;
 io.on("connection", (socket) => {
   count_user++;
   console.log(`new user connected: ${count_user}`);
+
+  // Optionally, you can listen for a response from the server
+  socket.on("message", (data) => {
+    console.log("Received response:", data);
+  });
 });
 
 server.listen(3000, () => {
