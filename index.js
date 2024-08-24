@@ -8,6 +8,8 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.sendFile(join(__dirname, "index.html"));
 });
@@ -21,6 +23,11 @@ io.on("connection", (socket) => {
   socket.on("message", (data) => {
     console.log("Received response:", data);
   });
+});
+
+app.post("/connect", (req, res) => {
+  console.log("Received response:", req.body);
+  res.send("Data received");
 });
 
 server.listen(3000, () => {
